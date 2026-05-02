@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HERNDON // INTELLIGENCE DOSSIER</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red: #cc0000;
+  --black: #0d0d0d;
+  --white: #f5f5f5;
+  --grey: #888;
+  --rule: #333;
+}
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: var(--black);
+  color: var(--white);
+  font-size: 17px;
+  line-height: 1.6;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+a { color: var(--red); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* TOP BAR */
+.topbar {
+  background: var(--red);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 10px;
+}
+
+/* HERO */
+.hero {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  border-bottom: 3px solid var(--red);
+}
+
+.hero-photo img {
+  width: 180px;
+  height: 240px;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  filter: grayscale(100%) contrast(1.1);
+}
+
+.hero-text {
+  padding: 24px 28px;
+  border-left: 3px solid var(--red);
+}
+
+.hero-text h1 {
+  font-size: 2.6rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.hero-text .role {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--red);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.vitals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 16px;
+}
+
+.v {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.v:nth-last-child(-n+2) { border-bottom: none; }
+
+.vl {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: var(--grey);
+  min-width: 60px;
+  padding-top: 3px;
+  flex-shrink: 0;
+}
+
+.vv { color: var(--white); }
+
+.new {
+  background: var(--red);
+  color: var(--white);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  padding: 2px 5px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+/* KEY LINKS */
+.key-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.klink {
+  display: inline-block;
+  background: var(--rule);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border: 1px solid #555;
+  text-decoration: none;
+}
+
+.klink:hover { background: var(--red); border-color: var(--red); text-decoration: none; }
+
+/* BLOCK */
+.block {
+  border-top: 1px solid var(--rule);
+  padding: 24px 0;
+}
+
+.block-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.block-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* ASSESS */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.assess {
+  border-top: 3px solid var(--rule);
+  padding-top: 14px;
+}
+
+.assess.smart { border-top-color: #4a9a4a; }
+.assess.dumb  { border-top-color: var(--red); }
+
+.assess-head {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.assess.smart .assess-head { color: #4a9a4a; }
+.assess.dumb  .assess-head { color: var(--red); }
+
+.assess ul { padding-left: 18px; }
+.assess li { margin-bottom: 10px; font-size: 15px; }
+.assess li strong { color: var(--white); }
+
+.verdict {
+  margin-top: 20px;
+  border-top: 1px solid var(--rule);
+  padding-top: 18px;
+  font-size: 16px;
+  color: #ccc;
+}
+
+.verdict-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+
+/* TABLE */
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--grey);
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+  padding: 8px 10px;
+}
+td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+td:first-child { font-weight: 700; color: var(--white); white-space: nowrap; width: 160px; }
+td:last-child { color: #bbb; }
+
+/* GROUND */
+.ground-item {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 15px;
+}
+.ground-item:last-child { border-bottom: none; }
+.gi-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  padding-top: 2px;
+  line-height: 1.3;
+}
+.gi-body strong { display: block; margin-bottom: 4px; color: var(--white); }
+.gi-body span { color: #aaa; font-size: 14px; }
+
+/* POSITIONS */
+.pos-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.pos-item:last-child { border-bottom: none; }
+.pos-claim {
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: var(--white);
+  font-size: 16px;
+}
+.pos-body { color: #aaa; font-size: 14px; }
+
+/* TWEET */
+.tweet {
+  border-left: 3px solid #1da1f2;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  font-size: 15px;
+  background: #111;
+}
+.tweet:last-of-type { margin-bottom: 0; }
+.tweet-meta { font-size: 12px; color: var(--grey); margin-top: 8px; }
+
+/* ALERT */
+.alert {
+  border-left: 3px solid var(--red);
+  padding: 14px 18px;
+  background: #1a0000;
+  font-size: 15px;
+  margin-bottom: 14px;
+}
+.alert-head {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+
+/* TIMELINE */
+.tl-item {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 15px;
+}
+.tl-item:last-child { border-bottom: none; }
+.tl-year { font-weight: 900; color: var(--red); font-size: 13px; padding-top: 2px; }
+.tl-body { color: #ccc; }
+
+/* SOURCES */
+.src-list { list-style: none; font-size: 14px; }
+.src-list li { padding: 6px 0; border-bottom: 1px solid var(--rule); }
+.src-list li:last-child { border-bottom: none; }
+
+/* FOOTER */
+footer {
+  background: var(--red);
+  color: var(--white);
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 12px;
+  margin-top: 0;
+}
+
+.content { padding: 0 28px; }
+
+@media (max-width: 600px) {
+  body { max-width: 100%; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-photo img { width: 100%; height: 180px; }
+  .hero-text { border-left: none; border-top: 3px solid var(--red); padding: 18px; }
+  .vitals { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: 1fr; }
+  .ground-item { grid-template-columns: 1fr; gap: 4px; }
+  .tl-item { grid-template-columns: 60px 1fr; }
+  .content { padding: 0 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">INTELLIGENCE DOSSIER — MAY 2026</div>
+
+<div class="hero">
+  <div class="hero-photo">
+    <img src="https://images.squarespace-cdn.com/content/v1/6797b7da253ad86137f98153/cb49955c-bc31-4bae-afa6-d08e80c285d3/Herndon%2C+Astead.jpg" alt="Astead Herndon">
+  </div>
+  <div class="hero-text">
+    <p class="role">American Journalism // Political Reporter</p>
+    <h1>Astead W.<br>Herndon</h1>
+    <div class="vitals">
+      <div class="v"><span class="vl">Age</span><span class="vv">33 — b. March 31, 1993</span></div>
+      <div class="v"><span class="vl">Current</span><span class="vv">Vox — Host + Editorial Director <span class="new">New</span></span></div>
+      <div class="v"><span class="vl">Origin</span><span class="vv">Flossmoor, IL (South Chicago suburbs)</span></div>
+      <div class="v"><span class="vl">Show</span><span class="vv">America, Actually (Vox/YouTube) — w/ Nate Silver + Hunter Harris</span></div>
+      <div class="v"><span class="vl">Former</span><span class="vv">NYT National Politics, 2018–Oct 2025</span></div>
+      <div class="v"><span class="vl">School</span><span class="vv">Marquette University, B.A. Journalism</span></div>
+      <div class="v"><span class="vl">Faith</span><span class="vv">Church of God in Christ (father is founding pastor)</span></div>
+      <div class="v"><span class="vl">Also</span><span class="vv">CNN political analyst</span></div>
+    </div>
+    <div class="key-links">
+      <a class="klink" href="https://www.vox.com/authors/astead-herndon" target="_blank">Vox →</a>
+      <a class="klink" href="https://x.com/AsteadWH" target="_blank">X / @AsteadWH →</a>
+      <a class="klink" href="https://www.youtube.com/@voxdotcom" target="_blank">America, Actually →</a>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="block">
+    <div class="block-label">Intellectual Assessment</div>
+    <div class="two-col">
+      <div class="assess smart">
+        <div class="assess-head">The Smart</div>
+        <ul>
+          <li><strong>Reads voters, not elites.</strong> Ground-level MAGA and working-class Black voter coverage. Went to Youngstown when others went to panels.</li>
+          <li><strong>Critiques his own side.</strong> Called 2024 "a Democratic loss." Said Dems "robbed Americans of a real choice."</li>
+          <li><strong>Admits when he's wrong.</strong> Publicly owns that he dismissed Trump in 2015 as "flavor of the day" — uses it as a standing reason to stay humble about predictions.</li>
+          <li><strong>The Run-Up was good.</strong> The Economist named it one of the best podcasts of 2022.</li>
+          <li><strong>Bets on himself.</strong> Left the NYT for Vox. Co-hosts America, Actually with Nate Silver and Hunter Harris.</li>
+        </ul>
+      </div>
+      <div class="assess dumb">
+        <div class="assess-head">The Limited</div>
+        <ul>
+          <li><strong>Zero international framework.</strong> Entire career is domestic U.S. The title "America, Actually" is the tell.</li>
+          <li><strong>Identity as endpoint.</strong> The South Side Black church kid frame is real — but it becomes the whole story. No Fanon, no Du Bois in argument.</li>
+          <li><strong>Podcaster epistemology.</strong> Cites voters, not economists or historians. Good instinct, ceiling of a method.</li>
+          <li><strong>The register.</strong> His new show is organized around three physical colored buckets on the set. That's the vocabulary he's pitching at.</li>
+          <li><strong>Teflon status.</strong> No substantive public critique exists. That's a protection structure, not a proof of quality.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="verdict">
+      <div class="verdict-label">Verdict</div>
+      Talented practitioner with genuine instincts about American voters. Not an intellectual. Range is domestic U.S. politics, with identity as the primary lens. The international gestures — Senegal, Son Heung-min, the new pope — reveal curiosity that hasn't developed into a framework.
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-label">Peer Comparison</div>
+    <table>
+      <thead><tr><th>vs.</th><th>The difference</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Nikole Hannah-Jones</td>
+          <td>Both NYT-era Black journalists who became brands. Hannah-Jones has the 1619 Project — a permanent monument with a real historiographical debate. Herndon has The Run-Up — a good podcast, soon forgotten.</td>
+        </tr>
+        <tr>
+          <td>Wesley Lowery</td>
+          <td>Both Black political reporters who left major papers. Lowery won the Pulitzer before leaving; Herndon was nominated, didn't win. Lowery's police violence work had institutional consequences. Herndon's is essential but not insurgent.</td>
+        </tr>
+        <tr>
+          <td>Ta-Nehisi Coates</td>
+          <td>Coates writes books that become syllabi and generate genuine intellectual opposition. Herndon does election podcasts. Different weight class.</td>
+        </tr>
+        <tr>
+          <td>Ezra Klein</td>
+          <td>Klein also left the Times to build something at Vox — the same company Herndon just joined. Klein has a real policy framework and cites political science, economics, philosophy. Herndon cites voters.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="block">
+    <div class="block-label">Documented Positions</div>
+    <div class="pos-item">
+      <div class="pos-claim">2024 was a Democratic failure, not a Trump mandate</div>
+      <div class="pos-body">"Democrats robbed Americans of a real choice." Said publicly. Not a talking point — a conclusion. <a href="https://talkeasypod.com/astead-herndon-2024/" target="_blank">Source →</a></div>
+    </div>
+    <div class="pos-item">
+      <div class="pos-claim">Trump coverage was "sanewashed" by mainstream press</div>
+      <div class="pos-body">Said this inside a frank NYT internal meeting and put it on record. <a href="https://www.semafor.com/article/11/03/2024/in-a-frank-internal-meeting-the-new-york-times-wrestled-with-its-political-role" target="_blank">Source →</a></div>
+    </div>
+    <div class="pos-item">
+      <div class="pos-claim">Journalism doesn't need 50/50 balance to be legitimate</div>
+      <div class="pos-body">Explicitly rejects split-coverage doctrine. Journalism must scrutinize those who lie. <a href="https://slate.com/news-and-politics/2021/01/astead-herndon-interview-new-york-times-trump.html" target="_blank">Source →</a></div>
+    </div>
+    <div class="pos-item">
+      <div class="pos-claim">Institutions worth serving even when broken</div>
+      <div class="pos-body">Framed through his father building Hallelujah Temple from scratch. Chose newspapers on the same logic — mission over business model. <a href="https://faithandleadership.com/episode-2-astead-herndon-navigating-the-career-pipeline-young-black-newspaper-reporter" target="_blank">Source →</a></div>
+    </div>
+    <div class="pos-item">
+      <div class="pos-claim">Zohran Mamdani is the biggest political rise of the past year</div>
+      <div class="pos-body">NYC mayoral candidate running on affordability, casual register, no ideological trench warfare. Herndon sees him as a proof of concept for post-Trump Democratic politics.</div>
+    </div>
+    <div class="pos-item">
+      <div class="pos-claim">Kamala Harris lacked raw political talent</div>
+      <div class="pos-body">Said it plainly on his own show: the centrism-vs-liberal read on Harris may have been a skill problem more than an ideology problem.</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-label">Shared Ground</div>
+    <div class="ground-item">
+      <div class="gi-label">Church / Marquette</div>
+      <div class="gi-body">
+        <strong>Father founded Hallelujah Temple (COGIC, Pentecostal) in Flossmoor when Astead was 1. He attended Marquette — a Jesuit, Catholic-affiliated university.</strong>
+        <span>Son of a Pentecostal pastor who chose a Catholic university. He has drawn explicit parallels between his father's church-building and his own journalism career.</span>
+      </div>
+    </div>
+    <div class="ground-item">
+      <div class="gi-label">Pope Leo XIV</div>
+      <div class="gi-body">
+        <strong>Pope Francis died April 21, 2025. Pope Leo XIV (Robert Prevost, from Chicago) elected May 8, 2025 — first American pope.</strong>
+        <span>A Black Pentecostal journalist from Chicago's south suburbs and a Catholic from Chicago share the same civic moment.</span>
+      </div>
+    </div>
+    <div class="ground-item">
+      <div class="gi-label">Son Heung-min</div>
+      <div class="gi-body">
+        <strong>Publicly declared Son Heung-min fandom on X. Son is now at LAFC (MLS) after leaving Tottenham.</strong>
+        <span>Son is a South Korean national hero. Herndon's interest appears genuine, not performative.</span>
+      </div>
+    </div>
+    <div class="ground-item">
+      <div class="gi-label">Senegal</div>
+      <div class="gi-body">
+        <strong>Has tweeted specifically about Senegal.</strong>
+        <span>Whether his interest extends to Francophone West Africa beyond American diaspora politics is unverified.</span>
+      </div>
+    </div>
+    <div class="ground-item">
+      <div class="gi-label">Chicago</div>
+      <div class="gi-body">
+        <strong>Homewood-Flossmoor — south suburban Chicago, Bears country.</strong>
+        <span>Anti-Packers by birth. Same geographic identity as the Chicago Catholic community.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-label">Social Evidence</div>
+    <div class="tweet">
+      <p>Senegal tweet — specific content not retrieved; flagged from prior research.</p>
+      <div class="tweet-meta"><a href="https://x.com/AsteadWH/status/2012997608000639405" target="_blank">@AsteadWH — View tweet →</a></div>
+    </div>
+    <div class="tweet">
+      <p>Son Heung-min appreciation — publicly declared fandom for the Korean forward.</p>
+      <div class="tweet-meta"><a href="https://x.com/AsteadWH/status/1057739836252131328" target="_blank">@AsteadWH — View tweet →</a></div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-label">Criticism Gap</div>
+    <div class="alert">
+      <div class="alert-head">Finding: No Substantive Public Critique</div>
+      <p>Thorough search returns near-zero criticism — not from Columbia Journalism Review, not from peer reporters, not from academic media critics. RFK Jr. called the Times "an instrument of the Democratic Party," which is not a critique of Herndon specifically.</p>
+    </div>
+    <p style="color:#aaa; font-size:15px; margin-top: 4px;">Critiquing him reads as critiquing Black journalists, the voter-empathy tradition, and people who grew up in struggling institutions and made good. The protection is structural, not earned by peer review.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-label">Career Timeline</div>
+    <div class="tl-item"><span class="tl-year">1993</span><span class="tl-body">Born Chicago. Father founds Hallelujah Temple (COGIC) in Flossmoor when Astead is ~1.</span></div>
+    <div class="tl-item"><span class="tl-year">2010</span><span class="tl-body">Graduates Homewood-Flossmoor High School.</span></div>
+    <div class="tl-item"><span class="tl-year">2014</span><span class="tl-body">Marquette University, B.A. Journalism. AmeriCorps gap year. Active in NABJ.</span></div>
+    <div class="tl-item"><span class="tl-year">2015</span><span class="tl-body">Boston Globe — uncovers real estate fraud and a $5,000 bribe. Turns the bribe down, writes the story.</span></div>
+    <div class="tl-item"><span class="tl-year">2018</span><span class="tl-body">Joins New York Times. Covers 2018 midterms, then Kamala Harris 2020 campaign, then 2020 election.</span></div>
+    <div class="tl-item"><span class="tl-year">2021</span><span class="tl-body">NYT 2020 election coverage nominated for Pulitzer. Forbes 30 Under 30.</span></div>
+    <div class="tl-item"><span class="tl-year">2022</span><span class="tl-body">Launches The Run-Up podcast. The Economist: one of the best podcasts of the year.</span></div>
+    <div class="tl-item"><span class="tl-year">2023</span><span class="tl-body">Pritzker Fellow, University of Chicago Institute of Politics.</span></div>
+    <div class="tl-item"><span class="tl-year">2024</span><span class="tl-body">Harris profile nominated for National Magazine Award. Covers 2024 election.</span></div>
+    <div class="tl-item"><span class="tl-year">Oct '25</span><span class="tl-body">Leaves NYT. Named editorial director + host at Vox. DePaul Distinguished Journalist Award.</span></div>
+    <div class="tl-item"><span class="tl-year">Apr '26</span><span class="tl-body"><strong style="color:#fff">America, Actually</strong> launches on Vox — video-first political podcast. <span class="new">Current</span></span></div>
+  </div>
+
+  <div class="block">
+    <div class="block-label">Sources</div>
+    <ul class="src-list">
+      <li><a href="https://en.wikipedia.org/wiki/Astead_Herndon" target="_blank">Wikipedia — Astead Herndon</a></li>
+      <li><a href="https://faithandleadership.com/episode-2-astead-herndon-navigating-the-career-pipeline-young-black-newspaper-reporter" target="_blank">Faith &amp; Leadership — on his father's church and career choice</a></li>
+      <li><a href="https://talkeasypod.com/astead-herndon-2024/" target="_blank">Talk Easy with Sam Fragoso — 2024 interview</a></li>
+      <li><a href="https://slate.com/news-and-politics/2021/01/astead-herndon-interview-new-york-times-trump.html" target="_blank">Slate — on Trump years, racism, and journalism</a></li>
+      <li><a href="https://www.semafor.com/article/11/03/2024/in-a-frank-internal-meeting-the-new-york-times-wrestled-with-its-political-role" target="_blank">Semafor — NYT internal meeting on political role</a></li>
+      <li><a href="https://minervastrategies.com/astead-herndon/" target="_blank">Minerva Strategies — nontraditional career path</a></li>
+      <li><a href="https://www.niemanlab.org/reading/astead-w-herndon-will-join-vox-as-host-and-editorial-director/" target="_blank">Nieman Lab — Herndon joins Vox</a></li>
+      <li><a href="https://www.depaul.edu/news/cjie-awards-2025" target="_blank">DePaul University — Distinguished Journalist Award 2025</a></li>
+      <li><a href="https://ccfw.calvin.edu/astead-herndon" target="_blank">Calvin University — 2026 speaker bio</a></li>
+      <li><a href="https://www.cookpolitical.com/CPR-access/odd-years/episode-10-astead-herndon" target="_blank">Cook Political Report — What Voters Want vs. What They're Getting</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>INTEL DOSSIER // ASTEAD W. HERNDON // MAY 2026 // NOT FOR CIRCULATION</footer>
+
+</body>
+</html>
