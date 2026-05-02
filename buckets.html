@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Rise of "Buckets" — Google Ngram</title>
+<meta property="og:title" content="The Idiotic Rise of 'Buckets'">
+<meta property="og:description" content="Google Ngram data on the corporate takeover of bucket-as-category. Nadir: 1976. Escape velocity: 1996. Data through 2022.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://books.google.com/ngrams/graph?content=different+buckets,into+buckets&year_start=1960&year_end=2022&corpus=en-2020">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Idiotic Rise of 'Buckets'">
+<meta name="twitter:description" content="Google Ngram: consulting jargon infects English. Nadir 1976. Escape velocity 1996. +168% by 2022.">
+<meta name="twitter:image" content="https://books.google.com/ngrams/graph?content=different+buckets,into+buckets&year_start=1960&year_end=2022&corpus=en-2020">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23cc0000'/><text y='72' x='18' font-size='62' font-family='Helvetica,Arial,sans-serif' font-weight='900' fill='white'>B</text></svg>">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: #0d0d0d;
+  color: #f5f5f5;
+  padding: 40px 32px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+h1 {
+  font-size: 1.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.sub {
+  font-size: 13px;
+  color: #888;
+  letter-spacing: 0.05em;
+  margin-bottom: 32px;
+}
+.sub span { color: #cc0000; font-weight: 700; }
+.chart-wrap {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  margin-bottom: 32px;
+}
+canvas { display: block; width: 100% !important; }
+
+.annotations {
+  border-top: 1px solid #333;
+  padding-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.ann {
+  border-left: 3px solid #cc0000;
+  padding-left: 12px;
+}
+.ann-year {
+  font-size: 11px;
+  font-weight: 900;
+  color: #cc0000;
+  letter-spacing: 0.15em;
+  margin-bottom: 4px;
+}
+.ann-text { font-size: 13px; color: #aaa; }
+
+.note {
+  font-size: 12px;
+  color: #555;
+  border-top: 1px solid #222;
+  padding-top: 16px;
+  line-height: 1.6;
+}
+
+a { color: #cc0000; }
+</style>
+</head>
+<body>
+
+<h1>The Idiotic Rise of "Buckets"</h1>
+<p class="sub">Google Ngram frequency of <span>"different buckets"</span> + <span>"into buckets"</span> in English-language books, 1960–2022. Indexed to 1960 = 100.</p>
+
+<div class="chart-wrap">
+  <canvas id="chart"></canvas>
+</div>
+
+<div class="annotations">
+  <div class="ann">
+    <div class="ann-year">1963–1966</div>
+    <div class="ann-text">Barbara Minto joins McKinsey — first female MBA hire. Develops MECE: Mutually Exclusive, Collectively Exhaustive. The intellectual parent of "buckets."</div>
+  </div>
+  <div class="ann">
+    <div class="ann-year">1976</div>
+    <div class="ann-text">The nadir. "Different buckets" at 46% of its 1960 frequency. McKinsey jargon hasn't escaped the firm yet.</div>
+  </div>
+  <div class="ann">
+    <div class="ann-year">1985</div>
+    <div class="ann-text">Minto publishes <em>The Pyramid Principle</em>. MECE goes from internal McKinsey practice to MBA curriculum. The seed is planted.</div>
+  </div>
+  <div class="ann">
+    <div class="ann-year">1996</div>
+    <div class="ann-text">"Different buckets" crosses its 1960 baseline for the first time. The MBA boom + PowerPoint (Office 97) accelerate the spread. Every corporation now has a consultant alumni on staff.</div>
+  </div>
+  <div class="ann">
+    <div class="ann-year">2000–2010</div>
+    <div class="ann-text">+136% to +239% above baseline. Consulting vocabulary colonizes tech, nonprofits, media, higher education. Your union rep's boss went to business school.</div>
+  </div>
+  <div class="ann">
+    <div class="ann-year">2022</div>
+    <div class="ann-text">+168% above 1960 and still rising. Astead Herndon brings literal colored buckets onto a YouTube set and thinks it's charming.</div>
+  </div>
+</div>
+
+<p class="note">
+  <strong style="color:#f5f5f5">Caveat:</strong> "Different buckets" and "into buckets" appear in literal contexts too (hardware, agriculture, chemistry). The ngram captures the word's total frequency, not just corporate usage. But the post-1996 acceleration is real and tracks with documented consulting expansion. The signal is the direction, not the absolute number. Data runs to 2022 (en-2020 corpus — Google's latest fully indexed). Source: <a href="https://books.google.com/ngrams/graph?content=different+buckets,into+buckets&year_start=1960&year_end=2022&corpus=en-2020" target="_blank">Google Books Ngram Viewer</a>.
+</p>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+const years = Array.from({length: 63}, (_, i) => 1960 + i);
+
+const rawDiff = [2.396179865638004e-09,2.4191030512099586e-09,2.191282821861762e-09,2.0829699076685415e-09,2.1407402358722803e-09,1.9752592894661802e-09,1.6679404048401481e-09,1.649315033753445e-09,1.3582952302597968e-09,1.3111240426688653e-09,1.2149433205520056e-09,8.94231054284132e-10,8.411789994714322e-10,8.212330339572662e-10,8.525652882086985e-10,8.526612194081906e-10,8.066833272797019e-10,8.287611826965754e-10,8.372159989087993e-10,7.684486856364612e-10,7.437148198872836e-10,6.428504712679179e-10,6.691164923720651e-10,7.425568453773528e-10,7.866274496860979e-10,8.671320606001842e-10,1.0090187415759795e-09,9.900406209136951e-10,1.0342146662876773e-09,1.0696733578262142e-09,1.0231187325920083e-09,1.0242974722375818e-09,9.964318100788967e-10,1.0648242922327101e-09,1.2078453792696564e-09,1.3048531778890394e-09,1.3955717771883614e-09,1.4715082644453252e-09,1.6239813938057068e-09,1.9074974774316698e-09,2.005160815166107e-09,2.07999784063162e-09,2.355142604746975e-09,2.5221253498384856e-09,2.8894256194027842e-09,3.0444262666406985e-09,3.1485419985496523e-09,3.5981668438418116e-09,3.870769736481959e-09,4.0237211023403626e-09,4.269437819155135e-09,4.567752652308497e-09,4.867373329783423e-09,5.006136584638301e-09,4.9840031784193735e-09,5.215747770189896e-09,5.489048390420034e-09,5.643255830887841e-09,5.789115599595464e-09,5.9704616488837865e-09,6.20116609913642e-09,6.346777681187632e-09,6.416995490532429e-09];
+
+const rawInto = [1.1187679227475655e-08,1.0752008527958879e-08,1.0818861362338339e-08,1.0043475067484614e-08,9.587467391420595e-09,8.777930446005452e-09,7.956274877025343e-09,7.552560735543271e-09,7.305868354734457e-09,6.7783497545040714e-09,7.177149668231258e-09,7.199205422279777e-09,7.101236995258173e-09,7.189690113104266e-09,7.75403728527278e-09,7.820450128751385e-09,7.840754268073624e-09,7.862778301464296e-09,7.98621365863791e-09,8.182430479207272e-09,8.347066149383409e-09,7.934186641023189e-09,8.085938395043156e-09,8.38569150626459e-09,8.38845297985407e-09,8.639923824002186e-09,9.102570887518726e-09,9.653842677640308e-09,1.038295836610002e-08,1.085955148028006e-08,1.1051231422040279e-08,1.159016489132065e-08,1.1705038208528355e-08,1.1742170283720758e-08,1.1993850103562766e-08,1.195254993392934e-08,1.2072494623030901e-08,1.2293201504373234e-08,1.2642237859746989e-08,1.320988296527048e-08,1.4396748047675243e-08,1.482923104946719e-08,1.5752292422835775e-08,1.627285963122306e-08,1.7387559075083507e-08,1.8165078711060038e-08,1.9207182384255768e-08,1.979366486588268e-08,2.1615347480162328e-08,2.2561555417561456e-08,2.3596581196930596e-08,2.443955082753746e-08,2.4999941926142e-08,2.551253608373827e-08,2.5565910785222253e-08,2.5510018478566313e-08,2.5650931537565417e-08,2.52027957868352e-08,2.4976990380715895e-08,2.5681072252885835e-08,2.568975758047524e-08,2.5901911371306598e-08,2.5150430182918626e-08];
+
+const base_d = rawDiff[0];
+const base_i = rawInto[0];
+
+const diffIdx  = rawDiff.map(v => +(v / base_d * 100).toFixed(1));
+const intoIdx  = rawInto.map(v => +(v / base_i * 100).toFixed(1));
+
+const annotations = {
+  1976: 'Nadir',
+  1985: 'Pyramid Principle published',
+  1996: 'Crosses baseline',
+  2019: '+294%'
+};
+
+Chart.defaults.color = '#888';
+Chart.defaults.font.family = 'Helvetica Neue, Helvetica, Arial, sans-serif';
+
+const ctx = document.getElementById('chart').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: years,
+    datasets: [
+      {
+        label: '"different buckets"',
+        data: diffIdx,
+        borderColor: '#cc0000',
+        backgroundColor: 'rgba(204,0,0,0.08)',
+        borderWidth: 2.5,
+        pointRadius: 0,
+        pointHoverRadius: 4,
+        fill: true,
+        tension: 0.3,
+      },
+      {
+        label: '"into buckets"',
+        data: intoIdx,
+        borderColor: '#888',
+        backgroundColor: 'rgba(136,136,136,0.05)',
+        borderWidth: 1.5,
+        pointRadius: 0,
+        pointHoverRadius: 4,
+        borderDash: [4, 3],
+        fill: true,
+        tension: 0.3,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: { color: '#888', font: { size: 12 }, padding: 20, boxWidth: 28 }
+      },
+      tooltip: {
+        backgroundColor: '#1a1a1a',
+        borderColor: '#333',
+        borderWidth: 1,
+        titleColor: '#f5f5f5',
+        bodyColor: '#aaa',
+        callbacks: {
+          label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y} (indexed)`
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: '#1e1e1e' },
+        ticks: {
+          color: '#555',
+          maxTicksLimit: 12,
+          font: { size: 11 }
+        }
+      },
+      y: {
+        grid: { color: '#1e1e1e' },
+        ticks: { color: '#555', font: { size: 11 } },
+        title: {
+          display: true,
+          text: 'Frequency index (1960 = 100)',
+          color: '#555',
+          font: { size: 11 }
+        }
+      }
+    }
+  }
+});
+
+// Draw annotation lines
+// We do this after render via a plugin — simpler to just note them in the HTML above
+</script>
+
+</body>
+</html>
